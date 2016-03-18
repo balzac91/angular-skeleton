@@ -1,0 +1,14 @@
+{
+  "name": "angular-skeleton",
+  "version": "0.0.1",
+  "description": "Basic skeleton for Angular apps",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/balzac91/angular-skeleton.git"
+  },
+  "author": "Kamil Fus",
+  "license": "MIT",
+  "devDependencies": {
+    "bower": "^1.7.7"
+  }
+}
