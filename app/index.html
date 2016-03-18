@@ -8,10 +8,16 @@
 </head>
 <body ng-app="app">
 
+<a ui-sref="pageOne">Page one</a>
+<a ui-sref="pageTwo">Page two</a>
 
+<ui-view></ui-view>
 
 <script src="../bower_components/angular/angular.min.js"></script>
 <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="./app.js"></script>
+<script src="./app.routes.js"></script>
+<script src="./pages/page-one/page-one.controller.js"></script>
+<script src="./pages/page-two/page-two.controller.js"></script>
 </body>
 </html>
