@@ -13,13 +13,13 @@
         url: '/page-one',
         templateUrl: './pages/page-one/page-one.html',
         controller: 'PageOneController',
-        controllerAs: 'pageOne'
+        controllerAs: 'vm'
       })
       .state('pageTwo', {
         url: '/page-two',
         templateUrl: './pages/page-two/page-two.html',
         controller: 'PageTwoController',
-        controllerAs: 'pageTwo'
+        controllerAs: 'vm'
       });
   }
 

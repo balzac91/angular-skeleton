@@ -3,11 +3,11 @@
 
   angular
     .module('app')
-    .factory('log', log);
+    .factory('logService', logService);
 
-  log.$inject = ['$log'];
+  logService.$inject = ['$log'];
 
-  function log($log) {
+  function logService($log) {
     return {
       logError: logError
     };
