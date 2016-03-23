@@ -1,0 +1,17 @@
+{
+  "extends": [
+    "defaults/configurations/walmart/es5-browser",
+    "angular"
+  ],
+  "env": {
+    "es6": false,
+    "browser": true
+  },
+  "rules": {
+    "quotes": [2, "single"],
+    "strict": [2, "function"],
+    "consistent-this": [2, "vm"],
+    "func-style": [2, "declaration"],
+    "no-invalid-this": 0
+  }
+}

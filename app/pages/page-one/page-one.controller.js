@@ -5,6 +5,8 @@
     .module('app')
     .controller('PageOneController', PageOneController);
 
+  PageOneController.$inject = ['log'];
+
   function PageOneController(log) {
     var vm = this;
 
@@ -12,6 +14,4 @@
 
     log.logError(vm.text);
   }
-
-  PageOneController.$inject = ['log'];
 })();
