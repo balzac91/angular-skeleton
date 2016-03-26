@@ -6,6 +6,7 @@ var gulp = require('gulp'),
   cssmin = require('gulp-cssmin'),
   templateCache = require('gulp-angular-templatecache'),
   inject = require('gulp-inject'),
+  webserver = require('gulp-webserver'),
   eventStream = require('event-stream'),
   rename = require('gulp-rename'),
   del = require('del');
@@ -86,4 +87,11 @@ gulp.task('create-app', ['jsmin', 'cssmin', 'fonts', 'images'], function () {
 
 gulp.task('build', ['clean'], function () {
   return gulp.start('create-app');
+});
+
+gulp.task('serve', function() {
+  gulp.src('./app')
+    .pipe(webserver({
+      open: true
+    }));
 });
