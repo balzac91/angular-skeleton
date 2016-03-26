@@ -25,8 +25,13 @@ gulp.task('clean', function () {
 });
 
 gulp.task('fonts', function () {
-  return gulp.src('./app/bower_components/bootstrap/fonts/*.*')
+  return gulp.src(['./app/bower_components/bootstrap/fonts/*.*', './app/bower_components/font-awesome/fonts/*.*', './app/assets/fonts/*.*'])
     .pipe(gulp.dest('./dist/fonts/'));
+});
+
+gulp.task('images', function () {
+  return gulp.src(['./app/assets/images/*.*'])
+    .pipe(gulp.dest('./dist/images/'));
 });
 
 gulp.task('cssmin', function () {
@@ -41,9 +46,9 @@ gulp.task('cssmin', function () {
 
 gulp.task('jsmin', function () {
   var bowerComponents = gulp.src(['./app/bower_components/angular/angular.min.js',
-    './app/bower_components/angular-ui-router/release/angular-ui-router.min.js',
+      './app/bower_components/angular-ui-router/release/angular-ui-router.min.js',
       './app/bower_components/jquery/dist/jquery.min.js',
-    './app/bower_components/bootstrap/dist/js/bootstrap.min.js']),
+      './app/bower_components/bootstrap/dist/js/bootstrap.min.js']),
     sources = gulp.src(['./app/**/*.js', '!./app/bower_components/**/*.js']),
     templates = gulp.src(['./app/**/*.html', '!./app/index.html', '!./bower_components/**/*.html'])
       .pipe(templateCache('templates.js', {
@@ -57,7 +62,7 @@ gulp.task('jsmin', function () {
     .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('create-app', ['jsmin', 'cssmin', 'fonts'], function () {
+gulp.task('create-app', ['jsmin', 'cssmin', 'fonts', 'images'], function () {
   var jsSrc = gulp.src('./dist/app.min.js', {
     read: false
   });
