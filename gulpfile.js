@@ -3,9 +3,12 @@ var gulp = require('gulp'),
   concat = require('gulp-concat'),
   uglify = require('gulp-uglify'),
   clean = require('gulp-clean'),
+  less = require('gulp-less'),
+  cssmin = require('gulp-cssmin'),
   templateCache = require('gulp-angular-templatecache'),
   inject = require('gulp-inject'),
-  eventStream = require('event-stream');
+  eventStream = require('event-stream'),
+  rename = require('gulp-rename');
 
 gulp.task('lint', function () {
   return gulp.src('./app/**/*.js')
@@ -20,6 +23,14 @@ gulp.task('watch', ['lint'], function () {
 gulp.task('clean', function () {
   return gulp.src('./dist/*')
     .pipe(clean());
+});
+
+gulp.task('cssmin', function () {
+  return gulp.src('./app/css/app.less')
+    .pipe(less())
+    .pipe(cssmin())
+    .pipe(rename({suffix: '.min'}))
+    .pipe(gulp.dest('./dist/'));
 });
 
 gulp.task('jsmin', function () {
@@ -37,13 +48,21 @@ gulp.task('jsmin', function () {
     .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('build', ['clean', 'jsmin'], function () {
-  var appSrc = gulp.src('./dist/app.min.js', {
+gulp.task('build', ['clean', 'jsmin', 'cssmin'], function () {
+  var jsSrc = gulp.src('./dist/app.min.js', {
+    read: false
+  });
+
+  var cssSrc = gulp.src('./dist/app.min.css', {
     read: false
   });
 
   return gulp.src('./app/index.html')
-    .pipe(inject(appSrc, {
+    .pipe(inject(jsSrc, {
+      ignorePath: 'dist',
+      addRootSlash: false
+    }))
+    .pipe(inject(cssSrc, {
       ignorePath: 'dist',
       addRootSlash: false
     }))
