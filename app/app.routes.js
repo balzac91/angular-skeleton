@@ -6,7 +6,7 @@
     .config(config);
 
   function config($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/state1');
+    $urlRouterProvider.otherwise('/page-one');
 
     $stateProvider
       .state('pageOne', {
