@@ -48,7 +48,8 @@ gulp.task('jsmin', function () {
   var bowerComponents = gulp.src(['./app/bower_components/angular/angular.min.js',
       './app/bower_components/angular-ui-router/release/angular-ui-router.min.js',
       './app/bower_components/jquery/dist/jquery.min.js',
-      './app/bower_components/bootstrap/dist/js/bootstrap.min.js']),
+      './app/bower_components/bootstrap/dist/js/bootstrap.min.js',
+      './app/bower_components/angular-bootstrap/ui-bootstrap.min.js']),
     sources = gulp.src(['./app/**/*.js', '!./app/bower_components/**/*.js']),
     templates = gulp.src(['./app/**/*.html', '!./app/index.html', '!./bower_components/**/*.html'])
       .pipe(templateCache('templates.js', {
