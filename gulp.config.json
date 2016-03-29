@@ -1,0 +1,30 @@
+{
+  "app": "./app/",
+  "dist": "./dist/",
+  "fonts": [
+    "./app/bower_components/bootstrap/fonts/*.*",
+    "./app/bower_components/font-awesome/fonts/*.*",
+    "./app/assets/fonts/*.*"
+  ],
+  "images": "./app/assets/images/*.*",
+  "js": [
+    "./app/**/*.js",
+    "!./app/bower_components/**/*.js"
+  ],
+  "html": [
+    "./app/**/*.html",
+    "!./app/index.html",
+    "!./bower_components/**/*.html"
+  ],
+  "appLess": "./app/css/app.less",
+  "less": "./app/**/*.less",
+  "vendorJs": [
+    "./app/bower_components/angular/angular.min.js",
+    "./app/bower_components/angular-ui-router/release/angular-ui-router.min.js",
+    "./app/bower_components/jquery/dist/jquery.min.js",
+    "./app/bower_components/bootstrap/dist/js/bootstrap.min.js",
+    "./app/bower_components/angular-bootstrap/ui-bootstrap.min.js"
+  ],
+  "jsMinified": "app.min.js",
+  "cssMinified": "app.min.css"
+}
