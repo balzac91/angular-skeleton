@@ -1,15 +1,15 @@
 var gulp = require('gulp'),
-  eslint = require('gulp-eslint'),
   concat = require('gulp-concat'),
-  uglify = require('gulp-uglify'),
-  less = require('gulp-less'),
   cssmin = require('gulp-cssmin'),
-  templateCache = require('gulp-angular-templatecache'),
-  inject = require('gulp-inject'),
-  webserver = require('gulp-webserver'),
-  eventStream = require('event-stream'),
-  rename = require('gulp-rename'),
   del = require('del'),
+  eslint = require('gulp-eslint'),
+  eventStream = require('event-stream'),
+  inject = require('gulp-inject'),
+  less = require('gulp-less'),
+  rename = require('gulp-rename'),
+  templateCache = require('gulp-angular-templatecache'),
+  uglify = require('gulp-uglify'),
+  webserver = require('gulp-webserver'),
   paths = require('./gulp.config.json');
 
 /*******************************************[MAIN TASKS]******************************************/
