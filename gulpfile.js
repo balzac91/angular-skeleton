@@ -34,6 +34,9 @@ gulp.task('serve', ['watch'], function() {
 
 /******************************************[HELPER TASKS]*****************************************/
 
+var glyphiconsRegex = /\.\.\/fonts\/glyphicons-([a-z-]+)\.([a-z]{2,5})/g,
+  fontAwesomeRegex = /\.\.\/fonts\/fontawesome-([a-z-]+)\.([a-z]{2,5})/g;
+
 /**
  * Remove dist directory
  */
@@ -75,24 +78,25 @@ gulp.task('jsmin', function () {
       .pipe(templateCache('templates.js', {
         module: 'app',
         root: './'
-      }));
+      }))
+      .pipe(replace('./assets/images/', './images/'));
 
   return eventStream.merge(bowerComponents, sources, templates)
     .pipe(concat(paths.jsMinified))
     .pipe(uglify())
     .pipe(gulp.dest(paths.dist));
 });
-
+// /\.\.\/fonts\/glyphicons-([a-z-]+)\.([a-z]{2,5})/g
+// ../assets/images/image.png
 /**
  * Minify and bundle less files
  */
 gulp.task('cssmin', function () {
   return gulp.src(paths.appLess)
-    .pipe(less({
-      'relative-urls': true
-    }))
-    .pipe(replace(/\.\.\/fonts\/glyphicons-([a-z-]+)\.([a-z]{2,5})/g, './fonts/glyphicons-$1.$2'))
-    .pipe(replace(/\.\.\/fonts\/fontawesome-([a-z-]+)\.([a-z]{2,5})/g, './fonts/fontawesome-$1.$2'))
+    .pipe(less())
+    .pipe(replace(glyphiconsRegex, './fonts/glyphicons-$1.$2'))
+    .pipe(replace(fontAwesomeRegex, './fonts/fontawesome-$1.$2'))
+    .pipe(replace('../assets/images/', './images/'))
     .pipe(cssmin())
     .pipe(rename(paths.cssMinified))
     .pipe(gulp.dest(paths.dist));
@@ -136,10 +140,8 @@ gulp.task('lint', function () {
  */
 gulp.task('css', function () {
   return gulp.src(paths.appLess)
-    .pipe(less({
-      'relative-urls': true
-    }))
-    .pipe(replace(/\.\.\/fonts\/glyphicons-([a-z-]+)\.([a-z]{2,5})/g, './bower_components/bootstrap/fonts/glyphicons-$1.$2'))
-    .pipe(replace(/\.\.\/fonts\/fontawesome-([a-z-]+)\.([a-z]{2,5})/g, './bower_components/font-awesome/fonts/fontawesome-$1.$2'))
+    .pipe(less())
+    .pipe(replace(glyphiconsRegex, './bower_components/bootstrap/fonts/glyphicons-$1.$2'))
+    .pipe(replace(fontAwesomeRegex, './bower_components/font-awesome/fonts/fontawesome-$1.$2'))
     .pipe(gulp.dest(paths.app));
 });
