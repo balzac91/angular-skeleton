@@ -7,6 +7,7 @@ var gulp = require('gulp'),
   inject = require('gulp-inject'),
   less = require('gulp-less'),
   rename = require('gulp-rename'),
+  replace = require('gulp-replace'),
   templateCache = require('gulp-angular-templatecache'),
   uglify = require('gulp-uglify'),
   webserver = require('gulp-webserver'),
@@ -41,53 +42,6 @@ gulp.task('clean', function () {
 });
 
 /**
- * Copy fonts to dist directory
- */
-gulp.task('copy-fonts', function () {
-  return gulp.src(paths.fonts)
-    .pipe(gulp.dest(paths.dist + 'fonts/'));
-});
-
-/**
- * Copy images to dist directory
- */
-gulp.task('copy-images', function () {
-  return gulp.src(paths.images)
-    .pipe(gulp.dest(paths.dist + 'images/'));
-});
-
-/**
- * Minify and bundle less files
- */
-gulp.task('cssmin', function () {
-  return gulp.src(paths.appLess)
-    .pipe(less({
-      'relative-urls': true
-    }))
-    .pipe(cssmin())
-    .pipe(rename(paths.cssMinified))
-    .pipe(gulp.dest(paths.dist));
-});
-
-/**
- * Minify and bundle JS files
- */
-gulp.task('jsmin', function () {
-  var bowerComponents = gulp.src(paths.vendorJs),
-    sources = gulp.src(paths.js),
-    templates = gulp.src(paths.html)
-      .pipe(templateCache('templates.js', {
-        module: 'app',
-        root: './'
-      }));
-
-  return eventStream.merge(bowerComponents, sources, templates)
-    .pipe(concat(paths.jsMinified))
-    .pipe(uglify())
-    .pipe(gulp.dest(paths.dist));
-});
-
-/**
  * Create optimized app
  */
 gulp.task('create-app', ['jsmin', 'cssmin', 'copy-fonts', 'copy-images'], function () {
@@ -112,6 +66,63 @@ gulp.task('create-app', ['jsmin', 'cssmin', 'copy-fonts', 'copy-images'], functi
 });
 
 /**
+ * Minify and bundle JS files
+ */
+gulp.task('jsmin', function () {
+  var bowerComponents = gulp.src(paths.vendorJs),
+    sources = gulp.src(paths.js),
+    templates = gulp.src(paths.html)
+      .pipe(templateCache('templates.js', {
+        module: 'app',
+        root: './'
+      }));
+
+  return eventStream.merge(bowerComponents, sources, templates)
+    .pipe(concat(paths.jsMinified))
+    .pipe(uglify())
+    .pipe(gulp.dest(paths.dist));
+});
+
+/**
+ * Minify and bundle less files
+ */
+gulp.task('cssmin', function () {
+  return gulp.src(paths.appLess)
+    .pipe(less({
+      'relative-urls': true
+    }))
+    .pipe(replace(/\.\.\/fonts\/glyphicons-([a-z-]+)\.([a-z]{2,5})/g, './fonts/glyphicons-$1.$2'))
+    .pipe(replace(/\.\.\/fonts\/fontawesome-([a-z-]+)\.([a-z]{2,5})/g, './fonts/fontawesome-$1.$2'))
+    .pipe(cssmin())
+    .pipe(rename(paths.cssMinified))
+    .pipe(gulp.dest(paths.dist));
+});
+
+/**
+ * Copy fonts to dist directory
+ */
+gulp.task('copy-fonts', function () {
+  return gulp.src(paths.fonts)
+    .pipe(gulp.dest(paths.dist + 'fonts/'));
+});
+
+/**
+ * Copy images to dist directory
+ */
+gulp.task('copy-images', function () {
+  return gulp.src(paths.images)
+    .pipe(gulp.dest(paths.dist + 'images/'));
+});
+
+/**
+ * Watch JS and less file
+ */
+gulp.task('watch', ['lint'], function () {
+  gulp.watch(paths.js, ['lint']);
+  gulp.watch(paths.less, ['css']);
+});
+
+/**
  * Lint JS files using ESlint
  */
 gulp.task('lint', function () {
@@ -124,17 +135,11 @@ gulp.task('lint', function () {
  * Compile less into css for dev server
  */
 gulp.task('css', function () {
-  return gulp.src(paths.less)
+  return gulp.src(paths.appLess)
     .pipe(less({
       'relative-urls': true
     }))
+    .pipe(replace(/\.\.\/fonts\/glyphicons-([a-z-]+)\.([a-z]{2,5})/g, './bower_components/bootstrap/fonts/glyphicons-$1.$2'))
+    .pipe(replace(/\.\.\/fonts\/fontawesome-([a-z-]+)\.([a-z]{2,5})/g, './bower_components/font-awesome/fonts/fontawesome-$1.$2'))
     .pipe(gulp.dest(paths.app));
-});
-
-/**
- * Watch JS and less file
- */
-gulp.task('watch', ['lint'], function () {
-  gulp.watch(paths.js, ['lint']);
-  gulp.watch(paths.less, ['css']);
 });
