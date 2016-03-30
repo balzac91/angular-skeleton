@@ -86,8 +86,7 @@ gulp.task('jsmin', function () {
     .pipe(uglify())
     .pipe(gulp.dest(paths.dist));
 });
-// /\.\.\/fonts\/glyphicons-([a-z-]+)\.([a-z]{2,5})/g
-// ../assets/images/image.png
+
 /**
  * Minify and bundle less files
  */
