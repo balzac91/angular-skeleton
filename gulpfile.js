@@ -143,7 +143,12 @@ gulp.task('watch', ['lint'], function () {
 gulp.task('lint', function () {
   return gulp.src(paths.js)
     .pipe(eslint())
-    .pipe(eslint.format());
+    .pipe(eslint.format())
+    .pipe(eslint.results(function (results) {
+      if (results.errorCount === 0 && results.warningCount === 0) {
+        util.log(util.colors.bold.green('ESlint test has been passed'));
+      }
+    }));
 });
 
 /**
