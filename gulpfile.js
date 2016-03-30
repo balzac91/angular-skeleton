@@ -10,6 +10,7 @@ var gulp = require('gulp'),
   replace = require('gulp-replace'),
   templateCache = require('gulp-angular-templatecache'),
   uglify = require('gulp-uglify'),
+  util = require('gulp-util'),
   webserver = require('gulp-webserver'),
   paths = require('./gulp.config.json');
 
@@ -23,13 +24,24 @@ gulp.task('build', ['clean'], function () {
 });
 
 /**
- * Serve dev environment with JS and less watcher
+ * Serve dev environment with JS and less watchers
  */
-gulp.task('serve', ['watch'], function() {
+gulp.task('serve', ['watch'], function () {
   gulp.src(paths.app)
     .pipe(webserver({
       open: true
     }));
+});
+
+/**
+ * Print description
+ */
+gulp.task('default', function () {
+  util.log();
+  util.log(util.colors.bold.green('Available commands:'));
+  util.log('-', util.colors.green('gulp build'), '- build optimized app, it creates dist directory with minified scripts and styles');
+  util.log('-', util.colors.green('gulp serve'), '- serve dev environment with JS and less watchers');
+  util.log();
 });
 
 /******************************************[HELPER TASKS]*****************************************/
