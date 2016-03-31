@@ -2,7 +2,7 @@
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
-Simple [AngularJS] (https://angularjs.org/) template for web apps. It contains all necessary tools you need to build and maintain web application based on Angular 1.x. [Gulp] (http://gulpjs.com/) provides easy way to automate popular tasks, such as less compilation, minifying scripts and styles etc. All app dependencies are installed with [Bower] (http://bower.io/).  
+Simple [AngularJS] (https://angularjs.org/) template for web apps. It contains all necessary tools you need to build and maintain web application based on Angular 1.x. [Gulp] (http://gulpjs.com/) provides easy way to automate popular tasks such as less compilation, minifying scripts and styles etc. All app dependencies are installed with [Bower] (http://bower.io/).  
 
 This skeleton uses the following libraries and frameworks:
 * [AngularJS] (https://angularjs.org/)
