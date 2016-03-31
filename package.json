@@ -30,5 +30,8 @@
     "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
     "gulp-webserver": "^0.9.1"
+  },
+  "scripts": {
+    "postinstall": "bower install"
   }
 }
