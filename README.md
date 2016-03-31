@@ -10,3 +10,8 @@ This skeleton uses the following libraries and frameworks:
 * [Bootstrap] (http://getbootstrap.com/)
 * [UI Bootstrap] (https://angular-ui.github.io/bootstrap/)
 * [Font Awesome] (https://fortawesome.github.io/Font-Awesome/)
+
+
+## Getting started
+* Download or clone the skeleton repository
+* Install dependencies with `npm install` - it automatically runs `bower install`
