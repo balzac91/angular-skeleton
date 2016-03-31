@@ -36,7 +36,7 @@ app/
     log.service.js              - exemplary service
   app.css                       - compiled css
   app.js                        - main app file
-  app.routes.js                 - main routes file
+  app.routes.js                 - main routing file
   index.html
 ```
 
