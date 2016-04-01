@@ -132,7 +132,7 @@ gulp.task('copy-images', function () {
 /**
  * Watch JS and less file
  */
-gulp.task('watch', ['lint'], function () {
+gulp.task('watch', ['lint', 'css'], function () {
   gulp.watch(paths.js, ['lint']);
   gulp.watch(paths.less, ['css']);
 });
