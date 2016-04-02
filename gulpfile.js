@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+  autoprefixer = require('gulp-autoprefixer'),
   concat = require('gulp-concat'),
   cssmin = require('gulp-cssmin'),
   del = require('del'),
@@ -108,6 +109,7 @@ gulp.task('cssmin', function () {
     .pipe(replace(glyphiconsRegex, './fonts/glyphicons-$1.$2'))
     .pipe(replace(fontAwesomeRegex, './fonts/fontawesome-$1.$2'))
     .pipe(replace('../assets/images/', './images/'))
+    .pipe(autoprefixer())
     .pipe(cssmin())
     .pipe(rename(paths.cssMinified))
     .pipe(gulp.dest(paths.dist));
@@ -159,5 +161,6 @@ gulp.task('css', function () {
     .pipe(less())
     .pipe(replace(glyphiconsRegex, './bower_components/bootstrap/fonts/glyphicons-$1.$2'))
     .pipe(replace(fontAwesomeRegex, './bower_components/font-awesome/fonts/fontawesome-$1.$2'))
+    .pipe(autoprefixer())
     .pipe(gulp.dest(paths.app));
 });
