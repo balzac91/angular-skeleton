@@ -7,6 +7,7 @@ var gulp = require('gulp'),
   eventStream = require('event-stream'),
   inject = require('gulp-inject'),
   less = require('gulp-less'),
+  plumber = require('gulp-plumber'),
   rename = require('gulp-rename'),
   replace = require('gulp-replace'),
   templateCache = require('gulp-angular-templatecache'),
@@ -158,6 +159,12 @@ gulp.task('lint', function () {
  */
 gulp.task('css', function () {
   return gulp.src(paths.appLess)
+    .pipe(plumber({
+      errorHandler: function (error) {
+        util.log(util.colors.red(error.message));
+        this.emit('end');
+      }
+    }))
     .pipe(less())
     .pipe(replace(glyphiconsRegex, './bower_components/bootstrap/fonts/glyphicons-$1.$2'))
     .pipe(replace(fontAwesomeRegex, './bower_components/font-awesome/fonts/fontawesome-$1.$2'))
