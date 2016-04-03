@@ -13,6 +13,7 @@ var gulp = require('gulp'),
   templateCache = require('gulp-angular-templatecache'),
   uglify = require('gulp-uglify'),
   util = require('gulp-util'),
+  watch = require('gulp-watch'),
   webserver = require('gulp-webserver'),
   paths = require('./gulp.config.json');
 
@@ -136,8 +137,13 @@ gulp.task('copy-images', function () {
  * Watch JS and less file
  */
 gulp.task('watch', ['lint', 'css'], function () {
-  gulp.watch(paths.js, ['lint']);
-  gulp.watch(paths.less, ['css']);
+  watch(paths.js, function () {
+    gulp.start('lint')
+  });
+
+  watch(paths.less, function () {
+    gulp.start('css')
+  });
 });
 
 /**
