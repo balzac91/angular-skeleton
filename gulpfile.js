@@ -4,9 +4,9 @@ var gulp = require('gulp'),
   cssmin = require('gulp-cssmin'),
   del = require('del'),
   eslint = require('gulp-eslint'),
-  eventStream = require('event-stream'),
   inject = require('gulp-inject'),
   less = require('gulp-less'),
+  merge2 = require('merge2'),
   plumber = require('gulp-plumber'),
   rename = require('gulp-rename'),
   replace = require('gulp-replace'),
@@ -96,7 +96,7 @@ gulp.task('jsmin', function () {
       }))
       .pipe(replace('./assets/images/', './images/'));
 
-  return eventStream.merge(bowerComponents, sources, templates)
+  return merge2(bowerComponents, sources, templates)
     .pipe(concat(paths.jsMinified))
     .pipe(uglify())
     .pipe(gulp.dest(paths.dist));
